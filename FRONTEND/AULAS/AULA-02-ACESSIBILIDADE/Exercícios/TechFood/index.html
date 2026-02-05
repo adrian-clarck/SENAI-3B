@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <title>TechFood - Cardápio Digital</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">TechFood</div>
+      <button class="search-icon" aria-label="Pesquisar">🔍</button>
+      <button class="cart-icon" aria-label="Carrinho">🛒</button>
+    </div>
+
+    <div class="banner-hero">
+      <h1>Sabor & Saber</h1>
+      <p>A melhor gastronomia tecnológica da região.</p>
+    </div>
+
+    <div class="menu-container">
+      <div class="abas-lista">
+        <input type="radio" name="categoria" id="massa" checked />
+        <button aria-pressed="true">Massas</button>
+
+        <input type="radio" name="categoria" id="bebida" />
+        <button aria-pressed="true">Bebidas</button>
+
+        <input type="radio" name="categoria" id="doce" />
+        <button aria-pressed="undefined">Doces</button>
+      </div>
+
+      <div class="aba-tela" id="tela-massas">
+        <div class="grid-produtos">
+          <div class="card">
+            <img
+              src="src/images/lasanha.jpg"
+              alt="Lasanha bolonhesa com queijo ralado acompanhada de uma pequena salada"
+            />
+            <h3>Lasanha Tradicional</h3>
+            <p>Massa artesanal ao molho bolonhesa com 4 queijos.</p>
+            <span class="preco">R$ 45,90</span>
+            <button class="btn-pedir" onclick="alert('Adicionado')">
+              Pedir
+            </button>
+          </div>
+
+          <div class="card">
+            <img
+              src="src/images/ravioli.jpg"
+              alt="Ravioli coberto de molho de tomate e queijo ralado"
+            />
+            <h3>Ravioli de Espinafre</h3>
+            <p>Recheado com ricota fresca e nozes picadas.</p>
+            <span class="preco">R$ 39,00</span>
+            <button class="btn-pedir">Pedir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rodape">
+      <p>
+        Siga-nos:
+        <button class="rs-fb" aria-label="Rede social Facebook">FB</button>
+        <button class="rs-fb" aria-label="Rede social Instagram">IG</button>
+      </p>
+    </div>
+  </body>
+</html>
