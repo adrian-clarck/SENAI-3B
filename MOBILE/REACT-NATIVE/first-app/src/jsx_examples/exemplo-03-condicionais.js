@@ -13,7 +13,7 @@ export default function Exemplo03() {
       <View style={styles.exemplo}>
       <Text style={styles.titulo}>Condicionais</Text>
       <Text style={styles.subtitulo}>Ternário</Text>
-      <Text>Status: {Logado ? "Logado" : "Deslogado"}</Text>
+      <Text>Status: {logado ? "Logado" : "Deslogado"}</Text>
     </View>
 
     <View style={styles.exemplo}>
