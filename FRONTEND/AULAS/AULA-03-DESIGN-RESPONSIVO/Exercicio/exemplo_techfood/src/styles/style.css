@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#topo-loja {
+  background-color: rgb(113, 11, 113);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+#bt_menu,
+#label-menu {
+  display: none;
+}
+
+#menu ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+#menu li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+#menu a {
+  color: #f1c40f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.titulo-secao {
+  text-align: center;
+  margin-top: 30px;
+  color: rgb(113, 11, 113);
+}
+
+/* Estrutura Inicial GRID - DESKTOP */
+
+.vitrine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  background-color: antiquewhite;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.preco {
+  display: block;
+  color: darkorange;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.bt_pedido {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%; /* Para funcionar como block level mesmo sendo inline */
+  cursor: pointer; /* Quando passar por cima do botão muda o icone do mouse*/
+}
+
+#rodape {
+  background-color: rgb(113, 11, 113);
+  color: white;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+/* MEDIAS */
+
+@media screen {
+  #topo-loja h1 {
+    letter-spacing: 1px; /* Muda o espaço entre letras */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tela Tablet */
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .vitrine-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tela celular */
+
+@media screen and (max-width: 600px), (orientation: portrait) {
+  /* Menu hamburguer/responsivo/retrátil */
+  #label-menu {
+    display: block;
+    font-size: 2.5rem;
+    color: #f1c40f;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  #menu ul {
+    display: none;
+  }
+
+  /* Verificando o bt_menu se está clicado e se tem irmão #menu */
+  #bt_menu:checked ~ #menu ul {
+    display: block;
+    padding: 10px 0;
+  }
+
+  .vitrine-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .desc {
+    display: none;
+  }
+
+  #menu li {
+    display: block;
+    margin: 15px 0;
+    border-bottom: 1px solid #55345e;
+    padding-bottom: 10px;
+  }
+}
+
+@media not screen {
+  #menu,
+  .bt_pedido,
+  #label-menu,
+  #bt_menu {
+    display: none;
+  }
+}
+
+.bt_pedido:hover {
+  background-color: #1e8549;
+}
