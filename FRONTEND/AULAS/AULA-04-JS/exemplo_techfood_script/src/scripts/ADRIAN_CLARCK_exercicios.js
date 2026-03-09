@@ -32,18 +32,22 @@ if(valorCompra > 150 || temCupom) {
     console.log("Frete Pago")
 } */
 
-/* EXERCICIO 4
+ /* EXERCICIO 4 */
 
-const numero = prompt("Escolha um número de 1 a 10: ")
+/* const numero = Number(prompt("Escolha um número de 1 a 10:"));
 
-let numeroSorteado = Math.ceil(Math.random() * 10)
-
-
-if(numero == numeroSorteado){
-    alert(`Parabéns você ganhou um brinde!`)
+if (numero < 1 || numero > 10 || isNaN(numero)) {
+    alert("Por favor, escolha um número válido entre 1 e 10.");
 } else {
-    alert(`Que pena, o número sorteado foi ${numeroSorteado}`)
+    let numeroSorteado = Math.ceil(Math.random() * 10);
+
+    if (numero === numeroSorteado) {
+        alert("Parabéns! Você ganhou um brinde!");
+    } else {
+        alert(`Que pena! O número sorteado foi ${numeroSorteado}`);
+    }
 } */
+
 
 /* EXERCICIO 5
 
