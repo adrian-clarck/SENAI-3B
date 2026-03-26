@@ -411,4 +411,73 @@ app.delete("/salas/:id", async (req, res) => {
   }
 });
 
+
+
+// =====================
+// CRUD SESSÕES
+// =====================
+
+app.get("/sessoes", async (req, res) => {
+  try {
+    const sessoes = await queryAsync("SELECT * FROM sessao");
+    res.json({
+      sucesso: true,
+      dados: sessoes,
+      total: sessoes.length,
+    });
+  } catch (erro) {
+    console.error("Erro ao listar sessão:", erro);
+    res.status(500).json({
+      sucesso: false,
+      mensagem: "Erro ao listar sessões",
+      erro: erro.message,
+    });
+  }
+});
+
+app.get("/sessoes/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id || isNaN(id)) {
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: "ID de Sessão Inválido.",
+      });
+    }
+
+    const sessoes = await queryAsync("SELECT * FROM sessao WHERE id = ?", [id]);
+
+    if (sessoes.length === 0) {
+      return res.status(404).json({
+        sucesso: false,
+        mensagem: "Sessão não encontrada.",
+      });
+    }
+
+    res.json({
+      sucesso: true,
+      dados: sessoes[0],
+    });
+  } catch (erro) {
+    console.error("Erro ao buscar sessão:", erro);
+    res.status(500).json({
+      sucesso: false,
+      mensagem: "Erro ao buscar sessão",
+      erro: erro.message,
+    });
+  }
+});
+
+app.post('/sessoes', async (req, res) => {
+  try {
+    const { filme_id, sala_id, data_hora, preco } =
+    req.body
+    
+  } catch (error) {
+    
+  }
+})
+
+
 module.exports = app;
