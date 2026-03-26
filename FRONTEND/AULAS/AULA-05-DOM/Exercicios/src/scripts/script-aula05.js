@@ -5,11 +5,11 @@ nomeUsuario.textContent = "Adrian Clarck";
 // 2. Avatar: trocar a imagem de perfil
 const fotoPerfil = document.querySelector("#foto-perfil");
 fotoPerfil.src =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOq762mu2M0UTVJ8fQmHGtBqBWpACHbb03vQ&s";
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8_LhRb-O-LCvNh5714WGXvoMm2ZyYdT9ngQ&s";
 
 // 3. Personalização: mudar cor de fundo do container
 const container = document.querySelector("#container-perfil");
-container.style.backgroundColor = "#e3f2fd";
+container.style.backgroundColor = "#272727";
 
 // 4. Status Real: adicionar classe e mudar texto
 const status = document.querySelector("#badge-status");

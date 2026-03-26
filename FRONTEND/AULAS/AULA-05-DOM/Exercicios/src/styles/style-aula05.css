@@ -1,46 +1,51 @@
 body {
-  background: #f0f2f5;
+  background: #1f1f1f;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
   padding: 50px;
 }
 #container-perfil {
-  background: white;
+  background: #151515;
   padding: 30px;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 9px #cc44f6;
   width: 300px;
+  color: #cc44f6;
 }
 #foto-perfil {
   border-radius: 50%;
-  border: 4px solid #ddd;
-  margin-bottom: 15px;
+  border: 4px solid #cc44f6;
+  margin-bottom: 5px;
   width: 150px;
 }
 .biografia {
-  color: #666;
+  color: #cd44f6ad;
   font-size: 0.9rem;
   margin: 10px 0;
+  padding-top: 5px;
 }
 #lista-skills {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 10px;
+  gap: 13px;
   justify-content: center;
   margin-top: 15px;
 }
 .skill {
-  background: #3498db;
-  color: white;
+  background: #c342eb;
+  color: rgb(225, 221, 221);
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.8rem;
 }
 .online {
   background: #27ae60 !important;
-  color: white;
+  color: rgb(225, 224, 224);
   font-weight: bold;
+  margin-top: 20px;
+  padding: 3px;
+  border-radius: 5px;
 }

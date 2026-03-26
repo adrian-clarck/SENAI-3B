@@ -103,10 +103,17 @@ export default function ExercicioView01() {
         </View>
       </View> */}
 
-      <Text style={styles.titulo}>Exercício 8 — Sidebar com Área de Conteúdo</Text>
+      {/* <Text style={styles.titulo}>Exercício 8 — Sidebar com Área de Conteúdo</Text>
       <View style={styles.exemplo}>
         <View style={{ }}>
          
+        </View>
+      </View> */}
+
+      <Text style={styles.titulo}>Exercício 9 — Semáforo</Text>
+      <View style={styles.exemplo}>
+        <View style={{ flexDirection: "column", padding: 10 }}>
+          <View style={[styles.blackBox]}></View>
         </View>
       </View>
     </View>
@@ -146,6 +153,13 @@ const styles = StyleSheet.create({
     width: 80,
     backgroundColor: "blue",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  blackBox: {
+    height: 200,
+    width: 120,
+    backgroundColor: "black",
+    alignContent: "center",
     justifyContent: "center",
   },
 });
