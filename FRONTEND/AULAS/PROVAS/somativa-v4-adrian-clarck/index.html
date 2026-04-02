@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CinePipoca - A Magia do Cinema</title>
+    <link rel="stylesheet" href="src/styles/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>CinePipoca 🍿</h1>
+      <p id="saudacao-cinema">Carregando sessão...</p>
+    </header>
+
+    <main class="container">
+      <section id="banner-vip" class="painel">
+        <h2>Experiência VIP 🎟️</h2>
+        <p>Passe o mouse aqui para apagar as luzes e entrar no Modo Cinema.</p>
+      </section>
+
+      <section class="painel">
+        <h2>Bilheteria Automática (R$ 35,00 / ingresso)</h2>
+
+        <div class="produto-dica">
+          <img
+            src="src/images/pipoca.png"
+            alt="Balde de Pipoca"
+            class="img-produto"
+          />
+        </div>
+
+        <div class="grupo-input">
+          <label for="qtd-ingressos">Quantos ingressos deseja comprar?</label>
+          <input type="number" id="qtd-ingressos" min="1" value="0" />
+        </div>
+        <p class="total">
+          Total a pagar: R$ <strong id="total-pagar">0.00</strong>
+        </p>
+      </section>
+
+      <section class="painel">
+        <h2>Mural de Avaliações</h2>
+        <div class="grupo-input">
+          <label>Qual filme você assistiu hoje?</label>
+          <input
+            type="text"
+            id="nome-filme"
+            placeholder="Ex: O Senhor dos Anéis, Matrix..."
+          />
+        </div>
+        <button id="btn-publicar" class="btn-primario">Publicar Filme</button>
+      </section>
+
+      <section class="painel vitrine">
+        <h2>Filmes Assistidos</h2>
+        <button id="btn-apagar" class="btn-secundario">Limpar Mural</button>
+
+        <div id="mural-criticas"></div>
+      </section>
+    </main>
+    <script src="src/scripts/script.js"></script>
+  </body>
+</html>

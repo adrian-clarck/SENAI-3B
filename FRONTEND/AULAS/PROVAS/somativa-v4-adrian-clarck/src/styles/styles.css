@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background-color: #f1f2f6;
+  color: #2f3542;
+}
+header {
+  background-color: #e74c3c;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 5px solid #c0392b;
+}
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+.painel {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+h2 {
+  color: #e74c3c;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #f1f2f6;
+  padding-bottom: 5px;
+}
+.grupo-input {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #57606f;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced6e0;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.total {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+.total strong {
+  color: #2ecc71;
+  font-size: 1.5rem;
+}
+
+.produto-dica {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.img-produto {
+  max-width: 130px;
+  height: auto;
+  border-radius: 8px;
+  border: 2px dashed #e74c3c;
+  padding: 5px;
+}
+
+.btn-primario,
+.btn-secundario {
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-primario {
+  background-color: #e74c3c;
+  color: white;
+}
+.btn-primario:hover {
+  background-color: #c0392b;
+}
+.btn-secundario {
+  background-color: #7f8c8d;
+  color: white;
+  margin-bottom: 15px;
+}
+.btn-secundario:hover {
+  background-color: #34495e;
+}
+
+/* =========================================
+   CLASSES QUE VOCÊ DEVE DESCOMENTAR E COMPLETAR
+   ========================================= */
+
+/* Missão 2: Estilo para quando o mouse entra no banner VIP (.modo-vip) */
+/* Dica: Altere a cor de fundo para #2c3e50 e a cor do texto para dourado (#f1c40f). A transformação de escala já está pronta! */
+
+
+.modo-vip {
+    background-color: #2c3e50;
+    color: #f1c40f;
+    transform: scale(1.04);
+}
+.modo-vip h2 {
+    color: #f1c40f;
+    border-color: #f1c40f;
+}
+
+
+/* Missão 4: Estilo do card de crítica de filme (.card-critica) */
+/* Dica: Adicione uma borda de 2px solid #e74c3c, um preenchimento interno (espaçamento) de 15px, pontas arredondadas de 8px e cor de fundo branca (#ffffff) */
+
+
+.card-critica {
+    margin-bottom: 10px;
+    border: 2px solid #e74c3c;
+    border-spacing: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    
+    
+    
+}
