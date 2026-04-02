@@ -36,7 +36,6 @@ botoesPedido.forEach((botao) => {
     // Usamos 'click' que é universal para mouse e touch
     botao.addEventListener("click", (event) => {
         // Evita qualquer comportamento padrão do navegador
-        event.preventDefault();
 
         const nomePrato = botao.parentElement.querySelector("h3").textContent;
         alert(
