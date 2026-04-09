@@ -39,6 +39,7 @@ app.get("/produtos/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
+    //Verifica se é um id e se o id não é um número (Caso não seja qualquer um dos dois, vai interromper o método)
     if (!id || isNaN(id)) {
       return res.status(400).json({
         sucesso: false,
@@ -46,7 +47,9 @@ app.get("/produtos/:id", async (req, res) => {
       });
     }
 
-    const produtos = await queryAsync("SELECT * FROM produto WHERE id = ?", [id]);
+    const produtos = await queryAsync("SELECT * FROM produto WHERE id = ?", [
+      id,
+    ]);
 
     if (produtos.length === 0) {
       return res.status(404).json({
@@ -71,16 +74,16 @@ app.get("/produtos/:id", async (req, res) => {
 
 app.post("/produtos", async (req, res) => {
   try {
-    const { nome, descricao, preco, disponivel } =
-      req.body;
+    const { nome, descricao, preco, disponivel } = req.body;
 
+    //Verifica se todos os atributos estão presentes e 'não vazios'
     if (!nome || !descricao || !preco || disponivel === undefined) {
       return res.status(400).json({
         sucesso: false,
         mensagem: "Nome, descrição, preço e disponibilidade são obrigatórios",
       });
     }
-
+    //Se o atributo preço não for um Number a função não ocorrerá
     if (typeof preco !== "number" || preco <= 0) {
       return res.status(400).json({
         sucesso: false,
@@ -88,6 +91,7 @@ app.post("/produtos", async (req, res) => {
       });
     }
 
+    //Se o atributo disponivel não for um Boolean a função não ocorrerá
     if (typeof disponivel !== "boolean") {
       return res.status(400).json({
         sucesso: false,
@@ -95,14 +99,18 @@ app.post("/produtos", async (req, res) => {
       });
     }
 
-    const novoProduto = {
+    //Como o produto novo deve ser criado
+    const criacaoProduto = {
       nome: nome.trim(),
       descricao: descricao.trim(),
       preco,
       disponivel: disponivel,
     };
 
-    const resultado = await queryAsync("INSERT INTO produto SET ?", [novoProduto]);
+    //Resultado da criação correta do produto no body
+    const resultado = await queryAsync("INSERT INTO produto SET ?", [
+      criacaoProduto,
+    ]);
 
     res.status(201).json({
       sucesso: true,
@@ -122,8 +130,7 @@ app.post("/produtos", async (req, res) => {
 app.put("/produtos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { nome, descricao, preco, disponivel } =
-      req.body;
+    const { nome, descricao, preco, disponivel } = req.body;
 
     if (!id || isNaN(id)) {
       return res.status(400).json({
@@ -132,10 +139,13 @@ app.put("/produtos/:id", async (req, res) => {
       });
     }
 
-    const produtoExiste = await queryAsync("SELECT * FROM produto WHERE id = ?", [
-      id,
-    ]);
+    //Verifica se o produto existe no banco
+    const produtoExiste = await queryAsync(
+      "SELECT * FROM produto WHERE id = ?",
+      [id],
+    );
 
+    //Se o produto não existir vai intemrromper o método
     if (produtoExiste.length === 0) {
       return res.status(404).json({
         sucesso: false,
@@ -143,6 +153,7 @@ app.put("/produtos/:id", async (req, res) => {
       });
     }
 
+    //Define o atributo que será atualizado caso não esteja vazio
     const produtoAtualizado = {};
 
     if (nome !== undefined) produtoAtualizado.nome = nome.trim();
@@ -156,11 +167,12 @@ app.put("/produtos/:id", async (req, res) => {
       }
       produtoAtualizado.preco = preco;
     }
-    if (disponivel !== undefined)
-      produtoAtualizado.disponivel = disponivel;
-    
+    if (disponivel !== undefined) produtoAtualizado.disponivel = disponivel;
 
-    await queryAsync("UPDATE produto SET ? WHERE id = ?", [produtoAtualizado, id]);
+    await queryAsync("UPDATE produto SET ? WHERE id = ?", [
+      produtoAtualizado,
+      id,
+    ]);
     res.json({
       sucesso: true,
       mensagem: 'Produto atualizado"',
@@ -179,6 +191,7 @@ app.delete("/produtos/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
+    //Verifica se é um id e se o id não é um número (Caso não seja qualquer um dos dois, vai interromper o método)
     if (!id || isNaN(id)) {
       return res.status(400).json({
         sucesso: false,
@@ -186,9 +199,11 @@ app.delete("/produtos/:id", async (req, res) => {
       });
     }
 
-    const produtoExiste = await queryAsync("SELECT * FROM produto WHERE id = ?", [
-      id,
-    ]);
+    //Verifica se o produto existe no banco
+    const produtoExiste = await queryAsync(
+      "SELECT * FROM produto WHERE id = ?",
+      [id],
+    );
 
     if (produtoExiste.length === 0) {
       return res.status(404).json({
@@ -212,7 +227,5 @@ app.delete("/produtos/:id", async (req, res) => {
     });
   }
 });
-
-
 
 module.exports = app;
