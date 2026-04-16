@@ -5,7 +5,7 @@ if (saudacao) {
     saudacao.textContent =
         hora < 12 
             ? "Bom dia! Bem-vindo à Sessão Matinê!"
-            : hora >= 12 || hora <= 18 
+            : hora >= 12 && hora <= 18 
                 ? "Boa tarde! Sessão da Tarde liberada!"
                 : "Boa noite! Prepare-se para a Sessão Coruja!"
 }
@@ -34,7 +34,7 @@ const nomeFilme = document.querySelector("#nome-filme")
 const muralCritica = document.querySelector("#mural-criticas")
 
 publicarFilme.addEventListener("click", (event) => {
-    muralCritica.innerHTML = (`<h3>🎬 Filme: ${nomeFilme.value.trim()} ⭐</h3>`)
+    muralCritica.innerHTML += (`<article class="card-critica"><h3>🎬 Filme: ${nomeFilme.value.trim()} ⭐</h3></article>`)
 })
 
 // Missão 05
