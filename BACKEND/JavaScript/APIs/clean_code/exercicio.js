@@ -99,6 +99,14 @@ function salaNaoEncontrada(sala) {
   return sala.length === 0;
 }
 
+const validarDadosAtualizados = (dados, res) => {
+  if (Object.keys(dados).lenght === 0) {
+    respostaErro(res, 400, "Nenhum dado enviado");
+    return false;
+  }
+  return true;
+};
+
 app.put("/salas/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -116,11 +124,11 @@ app.put("/salas/:id", async (req, res) => {
       return respostaErro(res, 404, "Sala não encontrada");
     }
 
-    const salaAtualizada = {};
+    if (!validarDadosAtualizados(dados, res)) {
+      return;
+    }
 
-    if (dados !== undefined) salaAtualizada.dados = dados.trim();
-
-    await queryAsync("UPDATE sala SET ? WHERE id = ?", [salaAtualizada, id]);
+    await queryAsync("UPDATE sala SET ? WHERE id = ?", [id]);
 
     return respostaSucesso(res, null, "Sala atualizada com sucesso");
   } catch (erro) {
