@@ -77,7 +77,7 @@ main.addEventListener("click", (event) => {
       );
     }
 
-    adicionarItemAoResumo(nomePrato, quantidade, precoExibido, card)
+    adicionarItemAoResumo(nomePrato, quantidade, precoExibido, card);
   }
 }); // Fim da main ouvinte de click
 
@@ -101,7 +101,7 @@ function adicionarItemAoResumo(nome, qtd, preco, cardOrigem) {
 
   // Exibindo a seção resumo
   secaoResumo.style.display = "block";
-  
+
   // Criando 1 item na lista
   const itemLi = document.createElement("li");
   itemLi.classList.add("item-resumo");
@@ -126,10 +126,11 @@ function adicionarItemAoResumo(nome, qtd, preco, cardOrigem) {
     }
   });
 
+  // Aqui é inserido na página (Parte Visual)
   itemLi.appendChild(textoSpan);
   itemLi.appendChild(btnRemover);
   listaResumo.appendChild(itemLi);
-}
+} // Fim da função AdicionarItemAoResumo
 
 const btnLimpar = document.querySelector("#btn-limpar");
 if (btnLimpar) {
@@ -137,7 +138,7 @@ if (btnLimpar) {
     const listaResumo = document.querySelector("#lista-resumo");
     const secaoResumo = document.querySelector("#secao-resumo");
 
-    // Remove todos os badges dos cards
+    // Remove todos os badges dos cards que criamos nos JS (Não tem no HTML)
     document.querySelectorAll(".badge-adicionado").forEach((b) => b.remove());
 
     // Remove filhos da lista um a um com firstElementChild
