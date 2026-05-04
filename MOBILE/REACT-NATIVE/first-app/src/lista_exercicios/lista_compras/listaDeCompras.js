@@ -49,6 +49,10 @@ export default function ListaDeCompras() {
     );
   }
 
+  function limparLista() {
+    setLista([])
+  }
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -78,7 +82,10 @@ export default function ListaDeCompras() {
           </Text>
         }
       />
+      
+        <Button title="Limpar lista" onPress={limparLista} color="red" />
     </View>
+    
   );
 }
 

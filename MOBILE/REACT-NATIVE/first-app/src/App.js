@@ -15,7 +15,8 @@ import Botao from "./basic_components/props/Exercícios/exercícios01"; */
 /* import TelaDeLogin from "./hooks/useRef_example";
 import TelaMoeda from "./hooks/useEffect_example"; */
 import TelaRecados from "./hooks/Exercicios/componenteRecados";
-import ListaDeCompras from "./text_input/exercicios/lista_compras/listaDeCompras";
+import ListaDeCompras from "./lista_exercicios/lista_compras/listaDeCompras";
+import FormularioExemplos from "./text_input/formulario";
 
 export default function App() {
   return <ListaDeCompras/>;
