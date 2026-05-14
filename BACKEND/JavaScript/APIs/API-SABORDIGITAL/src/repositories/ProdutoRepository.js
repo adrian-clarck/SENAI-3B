@@ -1,45 +1,44 @@
-const pool = require("../config/database");
+const pool = require('../config/database');
 
 class ProdutoRepository {
-  async listarProdutos() {
-    const listaProdutos = await pool.query("SELECT * FROM produto");
+    async findAll() {
+        const [rows] = await pool.query('SELECT * FROM produto ORDER BY id DESC');
+        return rows;
+    }
 
-    return listaProdutos;
-  }
+    async findById(id) {
+        const [rows] = await pool.query('SELECT * FROM produto WHERE id = ?', [id]);
+        return rows[0];
+    }
 
-  async buscarProdutoPorId(id) {
-    const mostrarProduto = await pool.query(
-      "SELECT * FROM produto WHERE id = ?",
-      [id],
-    );
+    async create(produtoData) {
+        const { nome, descricao, preco, categoria, disponivel } = produtoData;
+        const [result] = await pool.query(
+            'INSERT INTO produto (nome, descricao, preco, categoria, disponivel) VALUES (?, ?, ?, ?, ?)',
+            [nome, descricao, preco, categoria, disponivel]
+        );
+        return result.insertId;
+    }
 
-    return mostrarProduto[0];
-  }
+    async update(id, produtoData) {
+        const fields = [];
+        const values = [];
+        for (const [key, value] of Object.entries(produtoData)) {
+            fields.push(`${key} = ?`);
+            values.push(value);
+        }
+        if (fields.length === 0) return null;
 
-  async cadastrarProduto(dadosDoProduto) {
-    const resultadoCadastro = await pool.query("INSERT INTO produto SET ?", [
-      dadosDoProduto,
-    ]);
+        values.push(id);
+        const query = `UPDATE produto SET ${fields.join(', ')} WHERE id = ?`;
+        const [result] = await pool.query(query, values);
+        return result.affectedRows;
+    }
 
-    return resultadoCadastro.insertId;
-  }
-
-  async atualizarProduto(id, dadosDoProduto) {
-    const produtoAtualizado = await pool.query(
-      "UPDATE produto SET ? WHERE ID = ?",
-      [id, dadosDoProduto],
-    );
-
-    return produtoAtualizado;
-  }
-
-  async apagarProduto(id) {
-    const resultado = await pool.query("DELETE FROM produto WHERE id = ?", [
-      id,
-    ]);
-
-    return resultado.affectedRows;
-  }
+    async delete(id) {
+        const [result] = await pool.query('DELETE FROM produto WHERE id = ?', [id]);
+        return result.affectedRows;
+    }
 }
 
-module.exports = new ProdutoRepository()
+module.exports = new ProdutoRepository();
