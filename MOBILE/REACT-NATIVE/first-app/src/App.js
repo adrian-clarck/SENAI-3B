@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native"
 /* import ViewExample from "./basic_components/view_examples01";
 import ViewExample02 from "./basic_components/view_examples02";
 import ExercicioView01 from "./lista_exercicios_praticos/exercicios-praticos";
@@ -19,7 +20,11 @@ import ListaDeCompras from "./lista_exercicios/lista_compras/listaDeCompras";
 import FormularioExemplos from "./text_input/formulario";
 
 export default function App() {
-  return <ListaDeCompras/>;
+  return (
+  <NavigationContainer>
+
+  </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({

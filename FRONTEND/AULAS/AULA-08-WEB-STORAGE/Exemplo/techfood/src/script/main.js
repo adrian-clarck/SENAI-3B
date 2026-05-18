@@ -1,39 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
+  inicializarSubtotal();
   inicializarHoverCards();
   inicializarVitrine();
-  inicializarSubtotal()
 });
+
+function inicializarSubtotal() {
+  const inputQtd = document.querySelector("#qtd-lasanha");
+  const precoTexto = document.querySelector("#preco-lasanha");
+  const subTexto = document.querySelector("#sub-lasanha");
+
+  if (!inputQtd || !precoTexto) return;
+
+  inputQtd.addEventListener("input", function () {
+    const precoUnitario = 45.0;
+    const quantidade = Number(inputQtd.value);
+
+    if (isNaN(quantidade) || quantidade < 1) return;
+
+    const total = quantidade * precoUnitario;
+    precoTexto.textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+    precoTexto.style.color = total > 150 ? "#c0392b" : "#e67e22";
+
+    if (subTexto) {
+      subTexto.textContent =
+        quantidade > 1
+          ? `${quantidade}x R$ ${precoUnitario.toFixed(2).replace(".", ",")}`
+          : "";
+    }
+  });
+}
 
 function inicializarHoverCards() {
   const cards = document.querySelectorAll(".card");
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
+
+  cards.forEach(function (card) {
+    card.addEventListener("mouseenter", function () {
       card.style.transform = "translateY(-5px)";
       card.style.boxShadow = "0 10px 20px rgba(0,0,0,0.1)";
     });
-    card.addEventListener("mouseleave", () => {
+    card.addEventListener("mouseleave", function () {
       card.style.transform = "translateY(0)";
       card.style.boxShadow = "none";
     });
   });
 }
 
-function inicializarVitrine() {}
-
 function inicializarVitrine() {
   const main = document.querySelector("main");
-
   if (!main) return;
 
-  main.addEventListener("click", (event) => {
+  main.addEventListener("click", function (event) {
     const clicado = event.target;
 
-    //3.1 - Quantidade de Itens (+ e -)
     if (clicado.classList.contains("btn-menos")) {
       const box = clicado.parentElement;
       const spanQtd = box.querySelector(".qtd-valor");
-      const valorAtual = Number(spanQtd.textContent);
-      spanQtd.textContent = Math.max(1, valorAtual - 1);
+      spanQtd.textContent = Math.max(1, Number(spanQtd.textContent) - 1);
       atualizarPrecoCard(box);
       return;
     }
@@ -46,75 +68,90 @@ function inicializarVitrine() {
       return;
     }
 
-    //3.2 - Ação do BTN-PEDIDO
-
     if (clicado.classList.contains("btn-pedido")) {
       event.preventDefault();
+
       const card = clicado.parentElement;
       const nomePrato = card.querySelector("h3").textContent;
-      const quantidade = card.querySelector(".qtd-valor").textContent;
-      const preco = card.querySelector(".preco").textContent;
+      const quantidade = Number(card.querySelector(".qtd-valor").textContent);
+      const preco = parseFloat(
+        card.querySelector(".preco").getAttribute("data-preco"),
+      );
 
-      //efeito visual quando clicado "Pedir agora"
-
-      clicado.textContent = "✅ Adicionado";
+      clicado.textContent = "✓ Adicionado!";
       clicado.style.backgroundColor = "#27ae60";
-      clicado.disable = true;
+      clicado.disabled = true;
 
-      setTimeout(() => {
+      setTimeout(function () {
         clicado.textContent = "Pedir Agora";
         clicado.style.backgroundColor = "";
-        clicado.disable = false;
+        clicado.disabled = false;
+
+        // ⚠ MUDANÇA 2: reset da quantidade (não existia na Aula 7)
+        const box = card.querySelector(".quantidade-box");
+        if (box) {
+          box.querySelector(".qtd-valor").textContent = "1";
+          atualizarPrecoCard(box);
+        }
       }, 1500);
 
+      // ⚠ MUDANÇA 1: badge some após 2s (na Aula 7 ficava preso)
       const badgeExistente = card.querySelector(".badge-adicionado");
       if (badgeExistente) badgeExistente.remove();
+
       card.insertAdjacentHTML(
         "beforeend",
-        "<span class='badge-adicionado'> no resumo </span>",
+        "<span class='badge-adicionado'>✔ Pedido salvo</span>",
       );
+
       setTimeout(function () {
         const badge = card.querySelector(".badge-adicionado");
         if (badge) badge.remove();
       }, 2000);
 
-      // Resetar a quantidade de itens (Novo)
-      const box = card.querySelector(".quantidade-box");
-      if (box) {
-        box.querySelector(".qtd-valor").textContent = "1";
-        atualizarPrecoCard(box);
-      }
-
-      // Adição ação de salvarPedido()
+      // ⚠ MUDANÇA 3: salvarPedido() no lugar de adicionarItemAoResumo()
       salvarPedido({ nome: nomePrato, preco: preco, qtd: quantidade });
-
       atualizarContadorPedidos();
     }
   });
 }
 
 function atualizarPrecoCard(box) {
-  function atualizarPrecoCard(box) {
-    const card = box.parentElement;
-    const spanPreco = card.querySelector(".preco");
-    const precoUnitario = parseFloat(spanPreco.getAttribute("data-preco"));
-    const quantidade = Number(box.querySelector(".qtd-valor").textContent);
-    const total = precoUnitario * quantidade;
-    spanPreco.textContent = "R$ " + total.toFixed(2).replace(".", ",");
-    spanPreco.style.color = total > 150 ? "#c0392b" : "#e67e22";
-  }
+  const card = box.parentElement;
+  const spanPreco = card.querySelector(".preco");
+  const precoUnitario = parseFloat(spanPreco.getAttribute("data-preco"));
+  const quantidade = Number(box.querySelector(".qtd-valor").textContent);
+  const total = precoUnitario * quantidade;
+
+  spanPreco.textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+  spanPreco.style.color = total > 150 ? "#c0392b" : "#e67e22";
 }
 
 function salvarPedido(pedido) {
-  // Leu
   const lista = JSON.parse(localStorage.getItem("techfood_pedidos") || "[]");
-
-  // Modificou
-  pedido.subtotal = pedido.preco * pedido.qtd
-  lista.push(pedido)
-
-  // Salvou
-  localStorage.setItem("techfood_pedidos", JSON.stringify(lista))
+  pedido.subtotal = pedido.preco * pedido.qtd;
+  lista.push(pedido);
+  localStorage.setItem("techfood_pedidos", JSON.stringify(lista));
 }
 
-function atualizarContadorPedidos() {}
+function atualizarContadorPedidos() {
+  const lista = JSON.parse(localStorage.getItem("techfood_pedidos") || "[]");
+  const total = lista.reduce(function (acc, p) {
+    return acc + p.qtd;
+  }, 0);
+
+  const linkMenu = document.querySelector("#menu a[href='pedidos.html']");
+  if (!linkMenu) return;
+
+  let badge = linkMenu.querySelector(".badge-menu");
+  if (!badge) {
+    linkMenu.insertAdjacentHTML(
+      "beforeend",
+      "<span class='badge-menu'>0</span>",
+    );
+    badge = linkMenu.querySelector(".badge-menu");
+  }
+
+  badge.textContent = total;
+  linkMenu.classList.add("menu-ativo");
+}
