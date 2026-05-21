@@ -3,6 +3,7 @@ const ProdutoRepository = require("../repositories/ProdutoRepository");
 class ProdutoService {
   async listarProdutos() {
     const produtos = await ProdutoRepository.findAll();
+
     return {
       sucesso: true,
       dados: produtos,
@@ -16,6 +17,7 @@ class ProdutoService {
     }
 
     const produto = await ProdutoRepository.findById(id);
+
     if (!produto) {
       throw { status: 404, mensagem: "Produto não encontrado" };
     }
@@ -27,7 +29,7 @@ class ProdutoService {
   }
 
   async cadastrarProduto(dados) {
-    const { nome, descricao, preco, categoria, disponivel } = dados;
+    const { nome, descricao, preco, categoria, disponivel, imagem } = dados;
 
     if (!nome || !descricao || preco === undefined) {
       throw {
@@ -36,16 +38,25 @@ class ProdutoService {
       };
     }
 
-    if (typeof preco !== "number" || preco <= 0) {
-      throw { status: 400, mensagem: "Preço deve ser um número positivo" };
+    if (typeof Number(preco) !== "number" || Number(preco) <= 0) {
+      throw {
+        status: 400,
+        mensagem: "Preço deve ser um número positivo",
+      };
     }
 
     const novoProduto = {
       nome: nome.trim(),
       descricao: descricao.trim(),
-      preco,
+      preco: Number(preco),
       categoria: categoria || null,
-      disponivel: disponivel ?? true,
+
+      disponivel:
+        disponivel === undefined
+          ? true
+          : disponivel === "true" || disponivel === true,
+
+      imagem: imagem || null,
     };
 
     const id = await ProdutoRepository.create(novoProduto);
@@ -63,23 +74,41 @@ class ProdutoService {
     }
 
     const existe = await ProdutoRepository.findById(id);
+
     if (!existe) {
       throw { status: 404, mensagem: "Produto não encontrado" };
     }
 
     const atualizado = {};
-    const { nome, descricao, preco, categoria, disponivel } = dados;
+
+    const { nome, descricao, preco, categoria, disponivel, imagem } = dados;
 
     if (nome !== undefined) atualizado.nome = nome.trim();
-    if (descricao !== undefined) atualizado.descricao = descricao.trim();
-    if (preco !== undefined) {
-      if (typeof preco !== "number" || preco <= 0) {
-        throw { status: 400, mensagem: "Preço deve ser um número positivo" };
-      }
-      atualizado.preco = preco;
+
+    if (descricao !== undefined) {
+      atualizado.descricao = descricao.trim();
     }
+
+    if (preco !== undefined) {
+      if (typeof Number(preco) !== "number" || Number(preco) <= 0) {
+        throw {
+          status: 400,
+          mensagem: "Preço deve ser um número positivo",
+        };
+      }
+
+      atualizado.preco = Number(preco);
+    }
+
     if (categoria !== undefined) atualizado.categoria = categoria;
-    if (disponivel !== undefined) atualizado.disponivel = disponivel;
+
+    if (disponivel !== undefined) {
+      atualizado.disponivel = disponivel === "true" || disponivel === true;
+    }
+
+    if (imagem !== undefined) {
+      atualizado.imagem = imagem;
+    }
 
     if (Object.keys(atualizado).length === 0) {
       throw {
@@ -102,6 +131,7 @@ class ProdutoService {
     }
 
     const existe = await ProdutoRepository.findById(id);
+
     if (!existe) {
       throw { status: 404, mensagem: "Produto não encontrado" };
     }
