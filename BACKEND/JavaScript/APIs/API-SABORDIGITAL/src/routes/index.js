@@ -4,13 +4,14 @@ const router = express.Router();
 const produtoRoutes = require("./produtoRoutes");
 const cardapioRoutes = require("./cardapioRoutes");
 const pedidoRoutes = require("./pedidoRoutes");
+const uploadRoutes = require("./uploadRoutes");
 
 // Rota base (Root endpoint que estava em app.js)
 router.get("/", (req, res) => {
   res.json({
-    mensagem: "API SaborDigital funcionando 🍝",
+    mensagem: "API SaborDigital funcionando",
     versao: "1.0.0",
-    arquitetura: "MVC + SOLID (Refatorada)",
+    arquitetura: "MVC + SOLID",
   });
 });
 
@@ -18,5 +19,6 @@ router.get("/", (req, res) => {
 router.use("/produtos", produtoRoutes);
 router.use("/cardapios", cardapioRoutes);
 router.use("/pedidos", pedidoRoutes);
+router.use("/upload", uploadRoutes);
 
 module.exports = router;
