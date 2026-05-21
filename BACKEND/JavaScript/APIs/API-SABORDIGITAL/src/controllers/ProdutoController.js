@@ -4,6 +4,7 @@ class ProdutoController {
   async listar(req, res) {
     try {
       const resultado = await ProdutoService.listarProdutos();
+
       res.json(resultado);
     } catch (erro) {
       res.status(erro.status || 500).json({
@@ -17,6 +18,7 @@ class ProdutoController {
   async buscarPorId(req, res) {
     try {
       const resultado = await ProdutoService.buscarProdutoPorId(req.params.id);
+
       res.json(resultado);
     } catch (erro) {
       res.status(erro.status || 500).json({
@@ -29,7 +31,13 @@ class ProdutoController {
 
   async cadastrar(req, res) {
     try {
-      const resultado = await ProdutoService.cadastrarProduto(req.body);
+      const dados = {
+        ...req.body,
+        imagem: req.file ? `/uploads/${req.file.filename}` : null,
+      };
+
+      const resultado = await ProdutoService.cadastrarProduto(dados);
+
       res.status(201).json(resultado);
     } catch (erro) {
       res.status(erro.status || 500).json({
@@ -42,10 +50,19 @@ class ProdutoController {
 
   async atualizar(req, res) {
     try {
+      const dados = {
+        ...req.body,
+      };
+
+      if (req.file) {
+        dados.imagem = `/uploads/${req.file.filename}`;
+      }
+
       const resultado = await ProdutoService.atualizarProduto(
         req.params.id,
-        req.body,
+        dados,
       );
+
       res.json(resultado);
     } catch (erro) {
       res.status(erro.status || 500).json({
@@ -59,6 +76,7 @@ class ProdutoController {
   async deletar(req, res) {
     try {
       const resultado = await ProdutoService.deletarProduto(req.params.id);
+
       res.json(resultado);
     } catch (erro) {
       res.status(erro.status || 500).json({
