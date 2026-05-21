@@ -1,3 +1,8 @@
+/* ==========================================================
+   PEDIDOS.CSS — Estilos da página de Pedidos (pedidos.html)
+   Aula 8: entregue pronto — o live code foca no pedidos.js
+   ========================================================== */
+
 /* ── Seção principal ─────────────────────────────────────── */
 #secao-pedidos {
   max-width: 700px;
@@ -54,6 +59,9 @@
   background: #fafafa;
 }
 
+/* Botão ✕ remover item individual — Aula 7 → Aula 8
+   Na Aula 7 removia do DOM diretamente.
+   Aqui remove do localStorage e re-renderiza. */
 .btn-remover-item {
   background: none;
   border: 1px solid #e74c3c;
@@ -99,7 +107,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 12px;
   padding-top: 16px;
   border-top: 2px solid #e0e0e0;
@@ -118,7 +125,14 @@
 .btn-pedidos-grupo {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.btn-limpar-pedidos,
+.btn-voltar-cardapio,
+.btn-enviar-cozinha {
+  white-space: nowrap;
 }
 
 .btn-limpar-pedidos {
@@ -165,17 +179,46 @@
   }
 
   .btn-limpar-pedidos,
-  .btn-voltar-cardapio {
+  .btn-voltar-cardapio,
+  .btn-enviar-cozinha {
     width: 100%;
     text-align: center;
   }
+}
+
+/* ── Botão "Enviar para Cozinha" — Aula 9 ───────────────────
+   Chama POST /pedidos — o momento principal da Fetch API.
+   Destaque em verde para diferenciar dos outros botões.
+   ─────────────────────────────────────────────────────────── */
+.btn-enviar-cozinha {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+
+.btn-enviar-cozinha:hover {
+  background: #219150;
+}
+
+.btn-enviar-cozinha:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
 }
 
 /* =============================================================
    AULA 9
    ============================================================= */
 
-/* ── Layout do item de pedido ────────────────────────────────*/
+/* ── Layout do item de pedido ────────────────────────────────
+   Aula 8: item simples com nome e preço em linha.
+   Aula 9: duas linhas — info (nome + total) e status (badge + botão).
+   ─────────────────────────────────────────────────────────── */
 .item-pedido {
   flex-direction: column;
   align-items: flex-start;
@@ -204,7 +247,10 @@
   gap: 10px;
 }
 
-/* ── Badges de status ────────────────────────────────────────*/
+/* ── Badges de status ────────────────────────────────────────
+   Cor diferente para cada etapa do fluxo da cozinha.
+   Criados dinamicamente por gerarBotaoStatus() no pedidos.js.
+   ─────────────────────────────────────────────────────────── */
 .badge-status {
   font-size: 0.7rem;
   font-weight: bold;
@@ -231,7 +277,9 @@
   color: #555;
 }
 
-/* ── Borda lateral colorida por status ───────────────────────*/
+/* ── Borda lateral colorida por status ───────────────────────
+   Aplicada ao <li> pelo pedidos.js via classList.add("status-X").
+   ─────────────────────────────────────────────────────────── */
 .status-pendente {
   border-left: 4px solid #f9a825;
 }
@@ -246,7 +294,9 @@
   opacity: 0.7;
 }
 
-/* ── Botão de avançar status ───────────────────────────────── */
+/* ── Botão de avançar status ─────────────────────────────────
+   Criado por gerarBotaoStatus() com onclick inline.
+   ─────────────────────────────────────────────────────────── */
 .btn-status {
   background: #2c3e50;
   color: #fff;
@@ -267,6 +317,9 @@
   color: #aaa;
 }
 
+/* ── Resumo rápido no topo ───────────────────────────────────
+   Mostra total de itens e valor total dos pedidos.
+   ─────────────────────────────────────────────────────────── */
 #resumo-pedidos {
   display: flex;
   justify-content: space-between;
@@ -283,4 +336,19 @@
 #resumo-pedidos #valor-total-resumo {
   font-weight: bold;
   color: #e67e22;
+}
+
+/* ── Painel "Conta da Mesa" — Aula 9 ────────────────────────
+   Mostrado ao clicar em "Ver Conta da Mesa".
+   Usa fundo levemente diferente para distinguir do carrinho atual.
+   A lista reutiliza .item-pedido — mesmo padrão visual.
+   ─────────────────────────────────────────────────────────── */
+#lista-conta {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fffbf5;
 }

@@ -128,6 +128,10 @@
   margin-top: 40px;
 }
 
+/* ═══════════════════════════════════════════════════════
+   AULA 7 — Estilos novos
+   ═══════════════════════════════════════════════════════ */
+
 /* Badge inserido pelo insertAdjacentHTML dentro do card */
 .badge-adicionado {
   display: inline-block;
@@ -268,7 +272,13 @@
   }
 }
 
-/* ── Quantidade moderna ─────────────────────────────*/
+/* =============================================================
+   AULA 7 → AULA 8
+   ============================================================= */
+
+/* ── Quantidade moderna — Aula 7 ─────────────────────────────
+   Substituiu o <input type="number"> por botões + e -.
+   ─────────────────────────────────────────────────────────── */
 .quantidade-box {
   display: flex;
   align-items: center;
@@ -306,7 +316,10 @@
   text-align: center;
 }
 
-/* ── Badge no card  ──────────────────────── */
+/* ── Badge no card — Aula 7 → Aula 8 ────────────────────────
+   Inserido via insertAdjacentHTML quando o pedido é salvo.
+   Some após 2s — libera o card para novo pedido do mesmo prato.
+   ─────────────────────────────────────────────────────────── */
 .badge-adicionado {
   display: inline-block;
   margin-top: 8px;
@@ -331,7 +344,10 @@
   }
 }
 
-/* ── Destaque no link "Meus Pedidos" do menu ────────*/
+/* ── Destaque no link "Meus Pedidos" do menu — Aula 8 ────────
+   Ativado por atualizarContadorPedidos() após cada pedido salvo.
+   O link já existe no HTML — só ganha a classe e o badge.
+   ─────────────────────────────────────────────────────────── */
 a.menu-ativo {
   color: #f1c40f !important;
   font-weight: bold;
@@ -356,71 +372,15 @@ a.menu-ativo {
    AULA 9
    ============================================================= */
 
-/* ── Modal de boas-vindas ────────────────────────────────────*/
-#modal-boas-vindas {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-}
+/* ── Modal de boas-vindas ────────────────────────────────────
+   Estilos movidos para global.css (Aula 9) — centralizados lá
+   junto com o modal de confirmação (#modal-fechar-conta).
+   ─────────────────────────────────────────────────────────── */
 
-.modal-bv-conteudo {
-  background: #fff;
-  border-radius: 12px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 380px;
-  text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.modal-bv-conteudo h2 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-}
-
-.modal-bv-conteudo p {
-  color: #888;
-  margin-bottom: 1.25rem;
-  font-size: 0.9rem;
-}
-
-.modal-bv-conteudo input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  outline: none;
-  text-align: center;
-}
-
-.modal-bv-conteudo input:focus {
-  border-color: #e67e22;
-}
-
-.modal-bv-conteudo button {
-  width: 100%;
-  padding: 0.75rem;
-  background: #e67e22;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.modal-bv-conteudo button:hover {
-  background: #d35400;
-}
-
-/* ── Loading e erro no cardápio ──────────────────────────────*/
+/* ── Loading e erro no cardápio ──────────────────────────────
+   Exibido por renderizarCardapio() enquanto os dados carregam
+   ou quando ocorre erro na requisição.
+   ─────────────────────────────────────────────────────────── */
 .loading {
   grid-column: 1 / -1;
   text-align: center;
@@ -433,7 +393,9 @@ a.menu-ativo {
   color: #e74c3c;
 }
 
-/* ── Categoria do prato ────────────────────────────────────── */
+/* ── Categoria do prato ──────────────────────────────────────
+   Exibida abaixo do nome — vem do campo categoria do banco.
+   ─────────────────────────────────────────────────────────── */
 .card .categoria {
   font-size: 0.75rem;
   color: #aaa;

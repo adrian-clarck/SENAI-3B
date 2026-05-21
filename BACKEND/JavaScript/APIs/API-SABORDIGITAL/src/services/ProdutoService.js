@@ -50,7 +50,12 @@ class ProdutoService {
       descricao: descricao.trim(),
       preco: Number(preco),
       categoria: categoria || null,
-      disponivel: disponivel ?? true,
+
+      disponivel:
+        disponivel === undefined
+          ? true
+          : disponivel === "true" || disponivel === true,
+
       imagem: imagem || null,
     };
 
@@ -98,7 +103,7 @@ class ProdutoService {
     if (categoria !== undefined) atualizado.categoria = categoria;
 
     if (disponivel !== undefined) {
-      atualizado.disponivel = disponivel;
+      atualizado.disponivel = disponivel === "true" || disponivel === true;
     }
 
     if (imagem !== undefined) {

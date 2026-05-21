@@ -1,9 +1,0 @@
-POST http://localhost:3000/upload
-Content-Type: multipart/form-data; boundary=Boundary123
-
---Boundary123
-Content-Disposition: form-data; name="arquivo"; filename="teste.png"
-Content-Type: image/png
-
-< ./teste.png
---Boundary123--
