@@ -1,17 +1,22 @@
-const pool = require('./config/database')
-const app = require ('./app')
+const app = require("./app");
+const pool = require("./config/database");
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000;
 
-pool.getConnection((err, connection) => {
-    if(err){
-        console.error('Erro ao conectar ao banco:', err)
-        process.exit(1)
-    }
-    console.log('Conectado ao MySQL!')
-    connection.release()
-})
+// Testando conexão de forma assíncrona com Promises e iniciando o servidor
+async function startServer() {
+  try {
+    const connection = await pool.getConnection();
+    console.log("Conectando ao MySQL!");
+    connection.release();
 
-app.listen(PORT, ()=> {
-    console.log('Servidor rodando!')
-})
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}!`);
+    });
+  } catch (err) {
+    console.error("Erro ao conectar ao banco de dados:", err);
+    process.exit(1);
+  }
+}
+
+startServer();

@@ -15,14 +15,15 @@ import Botao from "./basic_components/props/Exercícios/exercícios01"; */
 /* import ContadorExample from "./hooks/useState_example"; */
 /* import TelaDeLogin from "./hooks/useRef_example";
 import TelaMoeda from "./hooks/useEffect_example"; */
-import TelaRecados from "./hooks/Exercicios/componenteRecados";
+/* import TelaRecados from "./hooks/Exercicios/componenteRecados";
 import ListaDeCompras from "./lista_exercicios/lista_compras/listaDeCompras";
-import FormularioExemplos from "./text_input/formulario";
+import FormularioExemplos from "./text_input/formulario"; */
+import StackNavigator from "./navigation/exemplos/stack_navigator";
 
 export default function App() {
   return (
   <NavigationContainer>
-
+    <StackNavigator/>
   </NavigationContainer>
   )
 }
