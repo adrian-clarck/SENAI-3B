@@ -19,11 +19,13 @@ import TelaMoeda from "./hooks/useEffect_example"; */
 import ListaDeCompras from "./lista_exercicios/lista_compras/listaDeCompras";
 import FormularioExemplos from "./text_input/formulario"; */
 import StackNavigator from "./navigation/exemplos/stack_navigator";
+import BottomTabNavigator from "./navigation/exemplos/bottom_tab_navigator";
+import DrawerNavigator from "./navigation/exemplos/drawer_navigator";
 
 export default function App() {
   return (
   <NavigationContainer>
-    <StackNavigator/>
+    <DrawerNavigator/>
   </NavigationContainer>
   )
 }

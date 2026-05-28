@@ -163,7 +163,7 @@ function atualizarContadorPedidos() {
   const lista = JSON.parse(localStorage.getItem("techfood_pedidos") || "[]");
 
   const total = lista.reduce((acc, pedido) => {
-    return acc + pedido.quantidade;
+    return acc + Number(pedido.quantidade || 0);
   }, 0);
 
   const linkMenu = document.querySelector("#menu a[href='pedidos.html']");

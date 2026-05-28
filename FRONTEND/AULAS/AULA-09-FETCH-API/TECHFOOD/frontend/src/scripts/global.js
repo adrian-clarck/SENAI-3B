@@ -54,7 +54,13 @@ function exibirNomeCliente() {
   const hora = agora.getHours() + agora.getMinutes() / 60;
 
   const saudacao =
-    hora < 12 ? "☀️ Bom dia" : hora < 18 ? "🌤️ Boa tarde" : "🌙 Boa noite";
+    hora < 12
+      ? "☀️ Bom dia"
+      : hora < 18
+        ? "🌤️ Boa tarde"
+        : hora < 24
+          ? "🌙 Boa noite"
+          : "🚫 Estamos fechados!";
 
   elemento.textContent = nome
     ? `${saudacao}, ${nome}! O que vai pedir hoje?`
@@ -73,8 +79,10 @@ function exibirBoasVindas() {
     saudacao = "☀️ Bom dia! Qual o seu pedido?";
   } else if (horaExata >= 12 && horaExata < 18) {
     saudacao = "🌤️ Boa tarde! Confira nosso cardápio.";
-  } else {
+  } else if (horaExata >= 18 && horaExata < 24) {
     saudacao = "🌙 Boa noite! Ainda dá tempo de pedir.";
+  } else {
+    saudacao = "🚫 Estamos fechados, abriremos novamente às 5:00!";
   }
 
   const elemento = document.querySelector("#boas-vindas");
