@@ -41,7 +41,7 @@ async function renderizarCardapio() {
 
       grid.appendChild(card);
     });
-  } catch {
+  } catch (erro) {
     grid.innerHTML = "<p class='loading erro'>Erro ao carregar o cardápio.</p>";
   }
 }
