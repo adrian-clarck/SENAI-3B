@@ -23,7 +23,13 @@ async function renderizarCardapio() {
       card.setAttribute("data-id", produto.id);
 
       card.innerHTML = `
+        ${
+          produto.imagem
+            ? `<img src="http://localhost:3000${produto.imagem}" alt="${produto.nome}">`
+            : ""
+        }
         <h3>${produto.nome}</h3>
+        ${produto.categoria ? `<p class="categoria">${produto.categoria}</p>` : ""}
         <p class="desc">${produto.descricao}</p>
 
         <div class="quantidade-box">

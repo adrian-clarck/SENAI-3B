@@ -1,0 +1,65 @@
+#secao-cadastro {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+#form-cadastro {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#form-cadastro label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#form-cadastro input,
+#form-cadastro textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#form-cadastro textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.check-disponivel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#form-cadastro button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#form-cadastro button:hover {
+  background: #219150;
+}
+
+#mensagem {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#form-cadastro select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
